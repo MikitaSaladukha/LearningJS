@@ -54,20 +54,23 @@
         document.getElementById("demo").innerHTML = some;
     }
 
-    function getFile(myCallback) {
+    let myPromise = new Promise(function(myResolve, myReject) {
         let req = new XMLHttpRequest();
+        req.open('GET', "document2.html");
         req.onload = function() {
             if (req.status == 200) {
-                myCallback(this.responseText);
+                myResolve(req.response);
             } else {
-                myCallback("Error: " + req.status);
+                myReject("File not Found");
             }
-        }
-        req.open('GET', "document2.html");
+        };
         req.send();
-    }
+    });
 
-    getFile(myDisplayer);
+    myPromise.then(
+        function(value) {myDisplayer(value);},
+        function(error2) {myDisplayer(error2);}
+    );
 
 
     let x = 15 * 5;
