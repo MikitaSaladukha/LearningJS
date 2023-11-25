@@ -7,6 +7,15 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<style>
+    table,th,td {
+        border : 1px solid black;
+        border-collapse: collapse;
+    }
+    th,td {
+        padding: 5px;
+    }
+</style>
 <body>
 <h1>JavaScript Modules</h1>
 
@@ -78,11 +87,54 @@
     console.log(JSON.stringify(module));
 </script>
 
+<script type="text/javascript" src="js/myScript12.js">
+</script>
+
+<script type="text/javascript" src="js/myScript123.js">
+</script>
+
+<h1 id="id1">Here color will change</h1>
 
 
+<button type="button"
+        onclick="document.getElementById('id1').style.color=func()">
+    Click Me To Change Color!</button>
 
 
+<button type="button"
+        onclick="document.getElementById('id1').innerHTML=func2()">
+    Click Me To write rgb Color Numbers!</button>
 
+<h2>The XMLHttpRequest Object</h2>
 
+<button type="button" onclick="loadDoc()">Get my CD collection</button>
+<br><br>
+<table id="demoTable"></table>
+
+<script>
+    function loadDoc() {
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            myFunction(this);
+        }
+        xhttp.open("GET", "cd_catalog.xml");
+        xhttp.send();
+    }
+    function myFunction(xml) {
+        const xmlDoc = xml.responseXML;
+        const x = xmlDoc.getElementsByTagName("CD");
+        let table="<tr><th>Artist</th><th>Title</th><th>Year</th></tr>";
+        for (let i = 0; i <x.length; i++) {
+            table += "<tr><td>" +
+                x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+                "</td><td>" +
+                x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+                "</td><td>" +
+                x[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue +
+                "</td></tr>";
+        }
+        document.getElementById("demoTable").innerHTML = table;
+    }
+</script>
 </body>
 </html>

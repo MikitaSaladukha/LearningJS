@@ -2,19 +2,25 @@
 <html>
 <body>
 
-<h2>What Can JavaScript Do?</h2>
+<h1 id="id1">My Heading 1</h1>
+<p id="pid">return</p>
 
-<p>JavaScript can change HTML attribute values.</p>
+<button type="button" 
+onclick="func()">
+Click Me!</button>
 
-<p id=demo>In this case JavaScript changes the value of the src (source) attribute of an image.</p>
-
- <script src="js/myScript.js"></script> 
-
-<img id="myImage" src="pic_bulboff.gif" style="width:100px">
-
-
-
-<button onclick="document.getElementById('myImage').src=myFunction()">click</button>
+<script>
+function func(){
+	debugger;
+		let x = "rgb("+Math.round(255*Math.random())+","+
+    							Math.round(255*Math.random())+","+
+                                Math.round(255*Math.random())+")";
+      document.getElementById('pid').innerHTML= x  ;           
+		document.getElementById('id1').style.color=x;
+		 console.log(x);
+     
+    }
+</script>
 
 </body>
 </html>
